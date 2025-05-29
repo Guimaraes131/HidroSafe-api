@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.HidroSafe.model.Endereco;
 import br.com.HidroSafe.model.Usuario;
+import br.com.HidroSafe.model.dto.UsuarioDto;
+import br.com.HidroSafe.repository.EnderecoRepository;
 import br.com.HidroSafe.repository.UsuarioRepository;
 import br.com.HidroSafe.specification.UsuarioSpecification;
 import jakarta.validation.Valid;
@@ -32,6 +35,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository repository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     @GetMapping
     public Page<Usuario> index(UsuarioFilter filtro,
@@ -50,9 +56,26 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void post(@RequestBody @Valid Usuario usuario) {
-        log.info("cadastrando usuario " + usuario.getEmail());
-        repository.save(usuario);
+    public Usuario post(@RequestBody @Valid UsuarioDto dto) {
+        log.info("cadastrando usuario " + dto.getEmail());
+
+        Endereco endereco = Endereco.builder()
+                    .logradouro(dto.getEndereco().getLogradouro())
+                    .bairro(dto.getEndereco().getBairro())
+                    .estado(dto.getEndereco().getEstado())
+                    .cidade(dto.getEndereco().getCidade())
+                    .build();
+
+        enderecoRepository.save(endereco);
+
+        Usuario usuario = Usuario.builder()
+                    .nomeCompleto(dto.getNomeCompleto())
+                    .email(dto.getEmail())
+                    .senha(dto.getSenha())
+                    .endereco(endereco)
+                    .build();
+
+        return repository.save(usuario);
     }
 
     @PutMapping("{id}")

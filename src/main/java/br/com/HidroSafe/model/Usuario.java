@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,21 +29,23 @@ public class Usuario {
     private Long id;
 
     @Size(min = 8, max = 64, message = "o nome deve ter entre 8 a 64 caracteres")
-    @NotBlank(message = "campo obrigatório")
+    @NotBlank(message = "o campo nome é obrigatório")
     private String nomeCompleto;
 
     @Email(message = "e-mail inválido")
-    @NotBlank(message = "campo obrigatório")
+    @NotBlank(message = "o campo email é obrigatório")
     @Column(unique = true)
     private String email;
 
     @Size(min = 6, message = "deve ter pelo menos 6 caracteres")
     private String senha;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private CargoUsuario cargo;
+    private CargoUsuario cargo = CargoUsuario.USUARIO;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
+    @NotNull(message = "o campo endereço é obrigatório")
     private Endereco endereco;
 }
