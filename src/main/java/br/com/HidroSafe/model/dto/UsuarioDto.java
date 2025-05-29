@@ -19,6 +19,7 @@ public class UsuarioDto {
     private String email;
 
     @Size(min = 6, message = "deve ter pelo menos 6 caracteres")
+    @NotBlank(message = "o campo senha deve ser obrigatório")
     private String senha;
 
     @NotNull(message = "o campo endereço é obrigatório")

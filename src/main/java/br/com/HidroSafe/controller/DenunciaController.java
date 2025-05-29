@@ -58,6 +58,8 @@ public class DenunciaController {
                     .cep(dto.getEndereco().getCep())
                     .build();
 
+        enderecoRepository.save(endereco);
+
         Denuncia denuncia = Denuncia.builder()
                     .assunto(dto.getAssunto())
                     .descricao(dto.getDescricao())
