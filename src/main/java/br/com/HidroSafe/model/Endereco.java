@@ -31,4 +31,7 @@ public class Endereco {
 
     @Size(min = 6, max = 32, message = "o estado deve ter entre 6 a 32 caracteres")
     private String estado;
+
+    @Size(min = 9, max = 9, message = "o cep deve ter 9 caracteres")
+    private String cep;
 }

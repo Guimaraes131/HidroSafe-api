@@ -64,6 +64,7 @@ public class UsuarioController {
                     .bairro(dto.getEndereco().getBairro())
                     .estado(dto.getEndereco().getEstado())
                     .cidade(dto.getEndereco().getCidade())
+                    .cep(dto.getEndereco().getCep())
                     .build();
 
         enderecoRepository.save(endereco);

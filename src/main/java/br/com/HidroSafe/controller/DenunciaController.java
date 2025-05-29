@@ -55,6 +55,7 @@ public class DenunciaController {
                     .bairro(dto.getEndereco().getBairro())
                     .cidade(dto.getEndereco().getCidade())
                     .estado(dto.getEndereco().getEstado())
+                    .cep(dto.getEndereco().getCep())
                     .build();
 
         Denuncia denuncia = Denuncia.builder()
