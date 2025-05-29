@@ -1,8 +1,10 @@
 package br.com.HidroSafe.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +31,10 @@ public class EnderecoController {
     private EnderecoRepository repository;
 
     @GetMapping
-    public List<Endereco> index() {
-        return repository.findAll();
+    public Page<Endereco> index(
+        @PageableDefault(size = 10, sort = "cep", direction = Direction.ASC) Pageable pageable) {
+
+        return repository.findAll(pageable);
     }
 
     @GetMapping("{id}")

@@ -41,7 +41,7 @@ public class UsuarioController {
 
     @GetMapping
     public Page<Usuario> index(UsuarioFilter filtro,
-        @PageableDefault(size = 10, sort = "nomeCompleto", direction = Direction.DESC) Pageable pageable) {
+        @PageableDefault(size = 10, sort = "nomeCompleto", direction = Direction.ASC) Pageable pageable) {
 
         var specification = UsuarioSpecification.withFilters(filtro);
 
