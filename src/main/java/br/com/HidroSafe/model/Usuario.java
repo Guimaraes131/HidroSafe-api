@@ -1,5 +1,12 @@
 package br.com.HidroSafe.model;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+public class Usuario implements UserDetails{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,14 +45,23 @@ public class Usuario {
     private String email;
 
     @Size(min = 6, message = "deve ter pelo menos 6 caracteres")
-    private String senha;
+    private String password;
 
-    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private CargoUsuario cargo = CargoUsuario.USUARIO;
+    private CargoUsuario cargo;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     @NotNull(message = "o campo endereço é obrigatório")
     private Endereco endereco;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(cargo.toString()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 }
