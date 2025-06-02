@@ -26,7 +26,7 @@ public class UsuarioDto {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private CargoUsuario cargo;
+    private CargoUsuario cargo = CargoUsuario.USUARIO;
 
     @NotNull(message = "o campo endereço é obrigatório")
     private Endereco endereco;

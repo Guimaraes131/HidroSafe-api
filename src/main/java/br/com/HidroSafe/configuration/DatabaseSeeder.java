@@ -31,40 +31,59 @@ public class DatabaseSeeder {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    
     @PostConstruct
     public void init() {
+
+        Endereco endereco1 = Endereco.builder()
+            .logradouro("Rua P")
+            .bairro("Bairro O")
+            .cep("01101-002")
+            .cidade("São Paulo")
+            .estado("São Paulo")
+            .build();
+
+        Endereco endereco2 = Endereco.builder()
+            .logradouro("Rua Z")
+            .bairro("Bairro W")
+            .cep("01101-020")
+            .cidade("São Paulo")
+            .estado("São Paulo")
+            .build();
+
+        Endereco endereco3 = Endereco.builder()
+            .cep("01001-100")
+            .logradouro("Rua K")
+            .bairro("Bairro L")
+            .cidade("São Paulo")
+            .estado("São Paulo")
+            .build();
+
+        Endereco endereco4 = Endereco.builder()
+            .cep("01011-100")
+            .logradouro("Rua O")
+            .bairro("Bairro P")
+            .cidade("São Paulo")
+            .estado("São Paulo")
+            .build();
+
+        var enderecos = List.of(endereco1, endereco2, endereco3, endereco4);
+
         var usuarios = List.of(
             Usuario.builder()
                 .nomeCompleto("Thiago Oliveira")
                 .email("thiago@gmail.com")
-                .password(passwordEncoder.encode("12345"))
+                .password(passwordEncoder.encode("123456"))
                 .cargo(CargoUsuario.USUARIO)
-                .endereco(
-                    (Endereco) Endereco.builder()
-                        .cep("01001-001")
-                        .logradouro("Rua A")
-                        .bairro("Bairro B")
-                        .cidade("São Paulo")
-                        .estado("São Paulo")
-                        .build()
-                    )
+                .endereco(endereco1)
                 .build(),
 
             Usuario.builder()
                 .nomeCompleto("Helena Silva")
                 .email("helena@gmail.com")
-                .password(passwordEncoder.encode("12345"))
+                .password(passwordEncoder.encode("123456"))
                 .cargo(CargoUsuario.ADMIN)
-                .endereco(
-                    (Endereco) Endereco.builder()
-                        .cep("01001-010")
-                        .logradouro("Rua M")
-                        .bairro("Bairro N")
-                        .cidade("São Paulo")
-                        .estado("São Paulo")
-                        .build()
-                    )
+                .endereco(endereco2)
                 .build()
             );
 
@@ -72,52 +91,18 @@ public class DatabaseSeeder {
             Denuncia.builder()
                 .assunto("Possível alagamento")
                 .descricao("Há pessoas jogando uma quantidade grande de lixo próximo aos bueiros da minha rua")
-                .endereco(
-                    (Endereco) Endereco.builder()
-                        .cep("01001-100")
-                        .logradouro("Rua K")
-                        .bairro("Bairro L")
-                        .cidade("São Paulo")
-                        .estado("São Paulo")
-                        .build()
-                    )
+                .endereco(endereco3)
                 .build(),
 
             Denuncia.builder()
                 .assunto("Vazamento de água no bueiro")
                 .descricao("Tem água saindo de dentro da tampa do bueiro")
-                .endereco(
-                    (Endereco) Endereco.builder()
-                        .cep("01011-100")
-                        .logradouro("Rua O")
-                        .bairro("Bairro P")
-                        .cidade("São Paulo")
-                        .estado("São Paulo")
-                        .build()
-                    )
+                .endereco(endereco4)
                 .build()
         );
 
-        var enderecos = List.of(
-            Endereco.builder()
-            .logradouro("Rua P")
-            .bairro("Bairro O")
-            .cep("01101-002")
-            .cidade("São Paulo")
-            .estado("São Paulo")
-            .build(),
-
-            Endereco.builder()
-            .logradouro("Rua Z")
-            .bairro("Bairro W")
-            .cep("01101-020")
-            .cidade("São Paulo")
-            .estado("São Paulo")
-            .build()
-        );
-
+        enderecoRepository.saveAll(enderecos);
         usuarioRepository.saveAll(usuarios);
         denunciaRepository.saveAll(denuncias);
-        enderecoRepository.saveAll(enderecos);
     }
 }

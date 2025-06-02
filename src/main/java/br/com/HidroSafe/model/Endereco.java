@@ -1,6 +1,5 @@
 package br.com.HidroSafe.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,6 +39,5 @@ public class Endereco {
 
     @Size(min = 9, max = 9, message = "o cep deve ter 9 caracteres")
     @NotBlank(message = "o campo cep é obrigatório")
-    @Column(unique = true)
     private String cep;
 }

@@ -47,8 +47,9 @@ public class Usuario implements UserDetails{
     @Size(min = 6, message = "deve ter pelo menos 6 caracteres")
     private String password;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private CargoUsuario cargo;
+    private CargoUsuario cargo = CargoUsuario.USUARIO;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")

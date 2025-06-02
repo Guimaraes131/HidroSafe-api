@@ -24,7 +24,7 @@ public class Denuncia {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 5, max = 24, message = "o assunto deve ter entre 5 e 24 caracteres")
+    @Size(min = 5, max = 64, message = "o assunto deve ter entre 5 e 24 caracteres")
     @NotBlank(message = "o campo assunto é obrigatório")
     private String assunto;
 
