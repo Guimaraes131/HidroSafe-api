@@ -14,18 +14,16 @@ import br.com.HidroSafe.service.TokenService;
 @RestController
 public class AuthController {
 
-    public record Token (String token, String email){}
-    public record Credentials (String email, String password){}
-
     @Autowired
     private TokenService tokenService;
 
     @Autowired
     AuthenticationManager authManager;
 
+
     @PostMapping("/login")
-    public Token login(@RequestBody Credentials credentials){
-        var authentication = new UsernamePasswordAuthenticationToken(credentials.email(), credentials.password());
+    public Token login(@RequestBody Credenciais credenciais){
+        var authentication = new UsernamePasswordAuthenticationToken(credenciais.email(), credenciais.password());
         var usuario = (Usuario) authManager.authenticate(authentication).getPrincipal();
 
         return tokenService.createToken(usuario);

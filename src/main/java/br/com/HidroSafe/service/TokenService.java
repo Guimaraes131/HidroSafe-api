@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
-import br.com.HidroSafe.controller.AuthController.Token;
+import br.com.HidroSafe.controller.Token;
 import br.com.HidroSafe.model.CargoUsuario;
 import br.com.HidroSafe.model.Usuario;
 
