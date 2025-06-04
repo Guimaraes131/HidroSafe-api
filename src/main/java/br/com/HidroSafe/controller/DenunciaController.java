@@ -2,6 +2,8 @@ package br.com.HidroSafe.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -38,6 +40,7 @@ public class DenunciaController {
     private EnderecoRepository enderecoRepository;
 
     @GetMapping
+    @Cacheable("denuncias")
     public Page<Denuncia> index(
         @PageableDefault(size = 10, sort = "assunto", direction = Direction.ASC) Pageable pageable) {
 
@@ -52,6 +55,7 @@ public class DenunciaController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
+    @CacheEvict(value = "denuncias", allEntries = true)
     public Denuncia post(@RequestBody @Valid DenunciaDto dto) {
         log.info("registrando denuncia " + dto);
 
@@ -75,6 +79,7 @@ public class DenunciaController {
     }
 
     @PutMapping("{id}")
+    @CacheEvict(value = "denuncias", allEntries = true)
     public Denuncia update(@RequestBody @Valid Denuncia denuncia, @PathVariable Long id) {
         log.info("atualizando denuncia " + id + " para " + denuncia);
         denuncia.setId(id);
@@ -84,6 +89,7 @@ public class DenunciaController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CacheEvict(value = "denuncias", allEntries = true)
     public void delete(@PathVariable Long id) {
         log.info("deletando denuncia " + id);
 

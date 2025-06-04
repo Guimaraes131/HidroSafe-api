@@ -1,3 +1,3 @@
-package br.com.HidroSafe.controller;
+package br.com.HidroSafe.model;
 
 public record Credenciais(String email, String password) {}

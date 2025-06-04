@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.HidroSafe.model.Credenciais;
+import br.com.HidroSafe.model.Token;
 import br.com.HidroSafe.model.Usuario;
 import br.com.HidroSafe.service.TokenService;
 
@@ -19,7 +21,6 @@ public class AuthController {
 
     @Autowired
     AuthenticationManager authManager;
-
 
     @PostMapping("/login")
     public Token login(@RequestBody Credenciais credenciais){
