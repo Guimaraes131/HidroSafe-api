@@ -51,23 +51,7 @@ public class DatabaseSeeder {
             .estado("São Paulo")
             .build();
 
-        Endereco endereco3 = Endereco.builder()
-            .cep("01001-100")
-            .logradouro("Rua K")
-            .bairro("Bairro L")
-            .cidade("São Paulo")
-            .estado("São Paulo")
-            .build();
-
-        Endereco endereco4 = Endereco.builder()
-            .cep("01011-100")
-            .logradouro("Rua O")
-            .bairro("Bairro P")
-            .cidade("São Paulo")
-            .estado("São Paulo")
-            .build();
-
-        var enderecos = List.of(endereco1, endereco2, endereco3, endereco4);
+        var enderecos = List.of(endereco1, endereco2);
 
         var usuarios = List.of(
             Usuario.builder()
@@ -91,13 +75,13 @@ public class DatabaseSeeder {
             Denuncia.builder()
                 .assunto("Possível alagamento")
                 .descricao("Há pessoas jogando uma quantidade grande de lixo próximo aos bueiros da minha rua")
-                .endereco(endereco3)
+                .logradouro("Rua das flores, 123 - Centro")
                 .build(),
 
             Denuncia.builder()
                 .assunto("Vazamento de água no bueiro")
                 .descricao("Tem água saindo de dentro da tampa do bueiro")
-                .endereco(endereco4)
+                .logradouro("Rua do bolo")
                 .build()
         );
 

@@ -21,10 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.HidroSafe.model.Denuncia;
-import br.com.HidroSafe.model.Endereco;
 import br.com.HidroSafe.model.dto.DenunciaDto;
 import br.com.HidroSafe.repository.DenunciaRepository;
-import br.com.HidroSafe.repository.EnderecoRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,9 +33,6 @@ public class DenunciaController {
 
     @Autowired
     private DenunciaRepository repository;
-
-    @Autowired
-    private EnderecoRepository enderecoRepository;
 
     @GetMapping
     @Cacheable("denuncias")
@@ -59,20 +54,11 @@ public class DenunciaController {
     public Denuncia post(@RequestBody @Valid DenunciaDto dto) {
         log.info("registrando denuncia " + dto);
 
-        Endereco endereco = Endereco.builder()
-                    .logradouro(dto.getEndereco().getLogradouro())
-                    .bairro(dto.getEndereco().getBairro())
-                    .cidade(dto.getEndereco().getCidade())
-                    .estado(dto.getEndereco().getEstado())
-                    .cep(dto.getEndereco().getCep())
-                    .build();
-
-        enderecoRepository.save(endereco);
 
         Denuncia denuncia = Denuncia.builder()
                     .assunto(dto.getAssunto())
                     .descricao(dto.getDescricao())
-                    .endereco(endereco)
+                    .logradouro(dto.getLogradouro())
                     .build();
 
         return repository.save(denuncia);

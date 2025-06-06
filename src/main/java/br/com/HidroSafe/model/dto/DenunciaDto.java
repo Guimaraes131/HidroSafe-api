@@ -1,6 +1,5 @@
 package br.com.HidroSafe.model.dto;
 
-import br.com.HidroSafe.model.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,6 +16,6 @@ public class DenunciaDto {
     @NotBlank(message = "o campo descrição é obrigatório")
     private String descricao;
 
-    @NotNull(message = "o campo endereço é obrigatório")
-    private Endereco endereco;
+    @NotNull(message = "o campo logradouro é obrigatório")
+    private String logradouro;
 }
