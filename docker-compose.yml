@@ -14,18 +14,18 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  app:
-    build: .
-    container_name: hidrosafe-app
-    depends_on:
-      - db
-    environment:
-      DB_USERNAME: admin
-      DB_PASSWORD: admin
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/hidrosafe
-    ports:
-      - "8080:8080"
-    restart: on-failure
+app:
+  build: .
+  container_name: hidrosafe-app
+  depends_on:
+    - db
+  environment:
+    SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/hidrosafe
+    SPRING_DATASOURCE_USERNAME: admin
+    SPRING_DATASOURCE_PASSWORD: admin
+  ports:
+    - "8080:8080"
+  restart: on-failure
 
 volumes:
   pgdata:
