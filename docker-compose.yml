@@ -14,7 +14,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  app:  # AGORA está dentro de 'services'
+  app:
     build: .
     container_name: hidrosafe-app
     depends_on:
