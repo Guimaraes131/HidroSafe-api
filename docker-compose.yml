@@ -27,14 +27,5 @@ services:
       - "8080:8080"
     restart: on-failure
 
-    command: >
-      sh -c "until pg_isready -h db -p 5432 -U postgres; do sleep 1; done; java -jar app.jar"
-    networks:
-      - app-network
-
 volumes:
   pgdata:
-
-networks:
-  app-network:
-    driver: bridge
