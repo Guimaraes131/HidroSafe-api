@@ -12,6 +12,7 @@
 * Pitch de apresentação: https://youtu.be/EpZtc4Rvggw
 * Repositório do APP Mobile: https://github.com/FIAP-MOBILE/global-solution-1-semestre-vroom
 * Deploy: https://hidrosafe-api.onrender.com
+* Vídeo demonstração da solução completa: https://youtu.be/LnIVyvO_IWc
 
 
 ## 🔎 Visão Geral
